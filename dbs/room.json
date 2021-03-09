@@ -1,0 +1,4 @@
+{"_id":{"$oid":"6030dd261b33be40048b898d"},"name":"Room 1","loc_id":{"$oid":"602d5a4c1b33be40048b897f"}}
+{"_id":{"$oid":"6030dd341b33be40048b898e"},"name":"Room 2","loc_id":{"$oid":"602d5a4c1b33be40048b897f"}}
+{"_id":{"$oid":"6030dd3a1b33be40048b898f"},"name":"Room 3","loc_id":{"$oid":"602d5a4c1b33be40048b897f"}}
+{"_id":{"$oid":"6036cf7b1b33be40048b8990"},"name":"Room 4","loc_id":{"$oid":"602d5a691b33be40048b8980"}}

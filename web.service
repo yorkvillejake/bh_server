@@ -1,0 +1,16 @@
+[Unit]
+Description=Martial Art Server
+
+[Service]
+PIDFile=/tmp/martial.pid
+User=root
+Group=root
+Restart=always
+RestartSec=10
+KillSignal=SIGQUIT
+WorkingDirectory=/home/OhMyGuru/martial/
+ExecStart=/home/OhMyGuru/martial/bin/www
+Environment=PATH=/usr/bin:/usr/local/bin
+
+[Install]
+WantedBy=multi-user.target

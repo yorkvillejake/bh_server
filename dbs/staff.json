@@ -1,0 +1,4 @@
+{"_id":{"$oid":"602fac2e165b0e526c35c81c"},"is_active":true,"is_junior":false,"name":"Michael","birthday":{"$date":{"$numberLong":"635385600000"}},"notes":"aaaa","loc_id":{"$oid":"602d5a4c1b33be40048b897f"},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"603511f05abadd2a587b712f"},"is_active":true,"is_junior":true,"name":"Joseph","birthday":{"$date":{"$numberLong":"393724800000"}},"notes":"He is a junior leader!!!","loc_id":{"$oid":"602d5a4c1b33be40048b897f"},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"6035129f5abadd2a587b7130"},"is_active":false,"is_junior":false,"name":"Alex","birthday":{"$date":{"$numberLong":"509500800000"}},"notes":"","loc_id":{"$oid":"602d5a4c1b33be40048b897f"},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"603741af2330211b10fb7451"},"is_active":true,"is_junior":false,"name":"Test1","birthday":{"$date":{"$numberLong":"1613952000000"}},"notes":"","loc_id":{"$oid":"602d5a691b33be40048b8980"},"__v":{"$numberInt":"0"}}

@@ -1,0 +1,2 @@
+{"_id":{"$oid":"602f73d61b33be40048b898b"},"name":"admin","password":"admin123","loc_id":{"$oid":"602d5a4c1b33be40048b897f"},"token":"eyJhbGciOiJIUzI1NiJ9.NjAyZjczZDYxYjMzYmU0MDA0OGI4OThi.d0KUCHRb2IwXBjAwmd2XCSndektuFSJth1yg5PFf7RI"}
+{"_id":{"$oid":"602f73f91b33be40048b898c"},"name":"test","password":"test1234","loc_id":"llll"}

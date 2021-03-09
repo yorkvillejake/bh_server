@@ -1,0 +1,8 @@
+{"_id":{"$oid":"602d5bcf1b33be40048b8983"},"name":"White","sequence":{"$numberInt":"10"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5be11b33be40048b8984"},"name":"Yellow","sequence":{"$numberInt":"20"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5bef1b33be40048b8985"},"name":"Orange","sequence":{"$numberInt":"30"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5bfd1b33be40048b8986"},"name":"Green","sequence":{"$numberInt":"40"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5c091b33be40048b8987"},"name":"Blue","sequence":{"$numberInt":"50"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5c1a1b33be40048b8988"},"name":"Advanced Blue","sequence":{"$numberInt":"60"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5c231b33be40048b8989"},"name":"Purple","sequence":{"$numberInt":"70"},"image":"","group":{"$oid":"602d5b3d1b33be40048b8981"}}
+{"_id":{"$oid":"602d5c811b33be40048b898a"},"name":"Hap 1","sequence":{"$numberInt":"10"},"image":"","group":{"$oid":"602d5b611b33be40048b8982"}}
