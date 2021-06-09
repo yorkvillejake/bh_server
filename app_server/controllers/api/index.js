@@ -10,6 +10,8 @@ const Class = require('./class');
 const Schedule = require('./schedule');
 const Belt = require('./belt');
 const Room = require('./room');
+const Location = require('./location');
+const Check = require('./check');
 
 router.post('/login', Admin.login);
 router.post('/logout', auth, Admin.logout);
@@ -43,6 +45,7 @@ router.post('/class/add', auth, Class.add);
 router.post('/class/edit', auth, Class.edit);
 router.post('/class/remove', auth, Class.remove);
 
+router.post('/schedule/gettoday', Schedule.gettoday);
 router.post('/schedule/getall', auth, Schedule.getall);
 router.post('/schedule/getbyclass', auth, Schedule.getbyclass);
 router.post('/schedule/getbystaff', auth, Schedule.getbystaff);
@@ -56,5 +59,10 @@ router.post('/schedule/remove', auth, Schedule.remove);
 router.post('/room/getall', auth, Room.getall);
 router.post('/belt/getall', Belt.getbelts);
 router.post('/beltgroup/getall', Belt.getbeltgroups);
+router.post('/location/getall', Location.getall);
 
+router.post('/check/student/add', Check.addStudent);
+router.post('/check/staff/add', Check.addStaff);
+router.post('/check/staff/get', auth, Check.getbystaff);
+router.post('/check/student/get', auth, Check.getbystudent);
 module.exports = router;

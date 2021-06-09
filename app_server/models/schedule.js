@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Student = require('./student');
 
 var ScheduleSchema = new Schema ({
   class_id: {type: Schema.ObjectId, ref: 'class', required: true},
@@ -12,5 +13,10 @@ var ScheduleSchema = new Schema ({
   room_id: {type: Schema.ObjectId, ref: 'room', required: true},
   loc_id: {type: Schema.ObjectId, ref: 'location', required: true}
 })
+
+ScheduleSchema.post('findOneAndDelete', function(result) {
+  console.log('hey', result._id);
+  Student.updateMany({ 'attendance.schedules': result._id }, { $pull: { 'attendance.$.schedules': result._id }}, { multi: true}).exec();
+});
 
 module.exports = mongoose.model('Schedule', ScheduleSchema, 'schedule');

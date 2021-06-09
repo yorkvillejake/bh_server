@@ -6,6 +6,10 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
+const cron = require('node-cron');
+const moment = require('moment');
+
+moment.tz.setDefault('America/Cancun');
 
 var indexRouter = require('./app_server/routes/index');
 var studentsRouter = require('./app_server/routes/students');
@@ -17,6 +21,7 @@ var setupRouter = require('./app_server/routes/setup');
 var apiRouter = require('./app_server/controllers/api');
 
 const { mongo_url, session_key } = require('./config');
+const { checkMissedClasses } = require('./app_server/cronjob');
 mongoose.connect(mongo_url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true, useCreateIndex: true });
 mongoose.connection.on('open', function() {
   console.log('Mongoose connected.');
@@ -38,8 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: session_key, resave: false, saveUninitialized: false}));
 
 app.use('/api', apiRouter);
-app.use('/', indexRouter);
-app.use('/admin/*', indexRouter);
+app.use('/*', indexRouter);
+// app.use('/admin/*', indexRouter);
 // app.use('/students', indexRouter);
 // app.use('/classes', indexRouter);
 // app.use('/instructors', indexRouter);
@@ -62,6 +67,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+var task = cron.schedule('50 23 * * *', () => {
+  checkMissedClasses();
 });
 
 module.exports = app;

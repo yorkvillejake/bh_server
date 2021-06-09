@@ -3,7 +3,7 @@ const BeltGroup = require('../../models/beltgroup');
 
 let getbelts = function(req, res)
 {
-  Belt.find({}, null, { sort: { sequence: 1 }}).lean().exec((err, docs) => {
+  Belt.find({}, null, { sort: { group: 1, sequence: 1 }}).lean().exec((err, docs) => {
     if (err)
       return res.json({ success: false, message: err.message });
 

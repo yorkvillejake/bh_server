@@ -1,6 +1,7 @@
 const Schedule = require('../../models/schedule');
 const Class = require('../../models/class');
 const Student = require('../../models/student');
+let ObjectId = require('mongoose').Types.ObjectId;
 
 let getall = function(req, res)
 {
@@ -9,6 +10,7 @@ let getall = function(req, res)
 
   Schedule.aggregate()
   .match(query)
+  .sort({ 'weekday': 1, 'date': 1 })
   .group({ _id: '$class_id', schedules: { $push : '$$CURRENT'} })
   .lookup({ from: 'class', localField: '_id', foreignField: '_id', as: 'class' })
   .sort({ 'class.name': 1 })
@@ -107,6 +109,32 @@ let getbydate = async function(req, res)
   })
 }
 
+let gettoday = async function(req, res) 
+{
+  var date = new Date();
+  let loc_id = ObjectId(req.body.loc_id);
+
+  var sp_query = { date, is_regular: false, loc_id };
+  var query = { is_regular: true, weekday: date.getDay(), loc_id };
+
+  var classes = await Class.find({ loc_id }).lean();
+  Schedule.find({$or: [query, sp_query]}, null).sort({ time_start: 1, time_end: 1 }).lean().exec(async (err, docs) => {
+    if (err)
+      return res.json({ success: false, message: err.message });
+
+    var result = [];
+    for (var i=0; i<docs.length; i++)
+    {
+      var cl = classes.find(c => c._id.equals(docs[i].class_id));
+      if (!cl || !cl.is_active) continue;
+      docs[i].class_name = cl ? cl.name : '';
+      docs[i].class_is_active = true;
+      docs[i].num_students = await Student.find({ 'attendance.schedules': docs[i]._id, is_active: true }).count().exec();
+      result.push(docs[i]);
+    }
+    return res.json({ success: true, result });
+  })
+}
 
 let get = function(req, res)
 {
@@ -163,5 +191,6 @@ module.exports = {
   getbyinterval,
   getbystaff,
   getbydate,
-  get
+  get,
+  gettoday
 }

@@ -4,15 +4,17 @@ const Student = require('../../models/student');
 const Class = require('../../models/class'); 
 const Belt = require('../../models/belt');
 // const Attendence = require('../../models/attendence');
+let ObjectId = require('mongoose').Types.ObjectId;
 
 let getall = async function(req, res)
 {
-  var query = {};
-  if (req.user.loc_id) query.loc_id = req.user.loc_id;
-
+  var query = req.body;
+  if (req.user && req.user.loc_id) query.loc_id = req.user.loc_id;
+  else if (!!query.loc_id) query.loc_id = ObjectId(query.loc_id);
+  
   var belts = await Belt.find({}).lean();
   var classes = await Class.find({}).lean().exec();
-  Student.find(query, [ 'firstname', 'lastname', 'avatar', 'is_active', 'levels', 'attendance' ], { sort: { name: -1 }}).lean().exec((err, docs) => {
+  Student.find(query, [ 'firstname', 'lastname', 'avatar', 'is_active', 'levels', 'attendance', 'birthday', 'date_end' ], { sort: { name: -1 }}).lean().exec((err, docs) => {
     if (err)
       return res.json({ success: false, message: err.message });
 
@@ -44,8 +46,8 @@ let getall = async function(req, res)
 
 let get = function(req, res)
 {
-  var query = { _id: req.body._id };
-  if (req.user.loc_id) query.loc_id = req.user.loc_id;
+  var query = req.body;
+  if (req.user && req.user.loc_id) query.loc_id = req.user.loc_id;
 
   Student.findOne(query, null).lean().exec((err, docs) => {
     if (err)

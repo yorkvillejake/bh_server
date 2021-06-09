@@ -2,10 +2,10 @@ const Class = require('../../models/class');
 
 let getall = function(req, res)
 {
-  var query = {};
-  if (req.user.loc_id) query.loc_id = req.user.loc_id;
+  var query = req.body;
+  if (req.user && req.user.loc_id) query.loc_id = req.user.loc_id;
 
-  Class.find(query, ['name', 'is_regular', 'is_active' ], { sort: { name: 1 }}).lean().exec((err, docs) => {
+  Class.find(query, 'name is_regular is_active belt_color', { sort: { name: 1 }}).lean().exec((err, docs) => {
     if (err)
       return res.json({ success: false, message: err.message });
 

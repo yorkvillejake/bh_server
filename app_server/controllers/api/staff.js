@@ -3,9 +3,9 @@ const Staff = require('../../models/staff');
 let getall = async function(req, res)
 {
   var query = req.body;
-  if (req.user.loc_id) query.loc_id = req.user.loc_id;
+  if (req.user && req.user.loc_id) query.loc_id = req.user.loc_id;
 
-  Staff.find(query, null, { sort: { name: -1 }}).lean().exec((err, docs) => {
+  Staff.find(query, null, { sort: { name: 1 }}).lean().exec((err, docs) => {
     if (err)
       return res.json({ success: false, message: err.message });
 
@@ -16,7 +16,7 @@ let getall = async function(req, res)
 let get = async function(req, res)
 {
   var query = { _id: req.body._id };
-  if (req.user.loc_id) query.loc_id = req.user.loc_id;
+  if (req.user && req.user.loc_id) query.loc_id = req.user.loc_id;
 
   Staff.findOne(query, null).lean().exec((err, docs) => {
     if (err)
